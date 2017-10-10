@@ -10,4 +10,8 @@ public class EndPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_page);
     }
+    public void RestartGame(View view){
+        Intent intent = new Intent(this, StartPage.class);
+        startActivity(intent);
+    }
 }
