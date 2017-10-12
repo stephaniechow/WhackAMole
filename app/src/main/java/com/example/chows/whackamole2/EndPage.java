@@ -1,7 +1,10 @@
 package com.example.chows.whackamole2;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+
 
 public class EndPage extends AppCompatActivity {
 
@@ -10,7 +13,7 @@ public class EndPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_page);
     }
-    public void RestartGame(View view){
+    public void restartGame(View view){
         Intent intent = new Intent(this, StartPage.class);
         startActivity(intent);
     }
