@@ -1,6 +1,7 @@
 package com.example.chows.whackamole2;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -49,6 +50,64 @@ public class MainActivity extends AppCompatActivity {
         r = new Random();
 
         game(a);
+
+        final MediaPlayer whackSoundMP= MediaPlayer.create(this, R.raw.whacksounds);
+
+        a.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whackSoundMP.start();
+            }
+        });
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whackSoundMP.start();
+            }
+        });
+        c.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whackSoundMP.start();
+            }
+        });
+        d.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whackSoundMP.start();
+            }
+        });
+        e.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whackSoundMP.start();
+            }
+        });
+        f.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whackSoundMP.start();
+            }
+        });
+        g.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whackSoundMP.start();
+            }
+        });
+        h.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whackSoundMP.start();
+            }
+        });
+        i.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whackSoundMP.start();
+            }
+        });
+
     }
 
     public void game(View view){
