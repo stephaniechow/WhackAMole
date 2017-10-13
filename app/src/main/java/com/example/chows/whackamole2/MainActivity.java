@@ -1,5 +1,6 @@
 package com.example.chows.whackamole2;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,30 +11,44 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageButton a = (ImageButton) findViewById(R.id.imageButton2);
-    ImageButton b = (ImageButton) findViewById(R.id.imageButton3);
-    ImageButton c = (ImageButton) findViewById(R.id.imageButton4);
-    ImageButton d = (ImageButton) findViewById(R.id.imageButton5);
-    ImageButton e = (ImageButton) findViewById(R.id.imageButton6);
-    ImageButton f = (ImageButton) findViewById(R.id.imageButton7);
-    ImageButton g = (ImageButton) findViewById(R.id.imageButton8);
-    ImageButton h = (ImageButton) findViewById(R.id.imageButton9);
-    ImageButton i = (ImageButton) findViewById(R.id.imageButton10);
+    ImageButton a, b, c, d, e, f, g, h, i;
 
-    TextView t = (TextView) findViewById(R.id.textView);
+    TextView t;
 
-    ImageButton[] moles = {a,b,c,d,e,f,g,h,i};
+    ImageButton[] moles;
 
-    int mistakes = 0;
-    int k = 1;
-    int score = 0;
+    int mistakes;
+    int k;
+    public  static int score;
 
-    Random r = new Random();
+    Random r;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        a = (ImageButton) findViewById(R.id.imageButton2);
+        b = (ImageButton) findViewById(R.id.imageButton3);
+        c = (ImageButton) findViewById(R.id.imageButton4);
+        d = (ImageButton) findViewById(R.id.imageButton5);
+        e = (ImageButton) findViewById(R.id.imageButton6);
+        f = (ImageButton) findViewById(R.id.imageButton7);
+        g = (ImageButton) findViewById(R.id.imageButton8);
+        h = (ImageButton) findViewById(R.id.imageButton9);
+        i = (ImageButton) findViewById(R.id.imageButton10);
+
+        moles = new ImageButton[] {a,b,c,d,e,f,g,h,i};
+
+        t = (TextView) findViewById(R.id.textView);
+
+        mistakes = -1;
+        k=1;
+        score=0;
+
+        r = new Random();
+
+        game(a);
     }
 
     public void game(View view){
@@ -47,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
             mistakes+=1;
         }
         if(mistakes == 3){
-            String lose = getString(R.string.loser);
-            t.setText(lose);
+            Intent i = new Intent(this, EndPage.class);
+            startActivity(i);
         }
         else{
             for(int z = 0; z<moles.length; z++){
