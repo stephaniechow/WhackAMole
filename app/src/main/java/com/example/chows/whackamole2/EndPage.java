@@ -25,4 +25,10 @@ public class EndPage extends AppCompatActivity {
         Intent intent = new Intent(this, StartPage.class);
         startActivity(intent);
     }
+
+    public void exitGame(View view){
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+    }
 }

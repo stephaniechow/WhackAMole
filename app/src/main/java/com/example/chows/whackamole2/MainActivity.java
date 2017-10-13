@@ -2,6 +2,7 @@ package com.example.chows.whackamole2;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,11 +11,11 @@ import android.widget.TextView;
 
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     ImageButton a, b, c, d, e, f, g, h, i;
 
-    TextView t;
+    TextView t,t2;
 
     ImageButton[] moles;
 
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     public  static int score;
 
     Random r;
+
+    CountDownTimer countDownTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         moles = new ImageButton[] {a,b,c,d,e,f,g,h,i};
 
         t = (TextView) findViewById(R.id.textView);
+        t2 = (TextView) findViewById(R.id.textView3);
 
         mistakes = -1;
         k=1;
@@ -49,69 +53,43 @@ public class MainActivity extends AppCompatActivity {
 
         r = new Random();
 
+        countDownTimer = new CountDownTimer(1500,1500){
+            @Override
+            public void onTick(long millisUntilFinished){
+            }
+            @Override
+            public void onFinish(){
+                k=1;
+                game(a);
+            }
+        };
+
+        /*final MediaPlayer whackSoundMP= MediaPlayer.create(this, R.raw.whacksounds);
+
+        for(int i = 0; i<moles.length; i++){
+            moles[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    whackSoundMP.start();
+                }
+            });
+        }*/
+
+        countDownTimer.start();
         game(a);
-
-        final MediaPlayer whackSoundMP= MediaPlayer.create(this, R.raw.whacksounds);
-
-        a.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                whackSoundMP.start();
-            }
-        });
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                whackSoundMP.start();
-            }
-        });
-        c.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                whackSoundMP.start();
-            }
-        });
-        d.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                whackSoundMP.start();
-            }
-        });
-        e.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                whackSoundMP.start();
-            }
-        });
-        f.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                whackSoundMP.start();
-            }
-        });
-        g.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                whackSoundMP.start();
-            }
-        });
-        h.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                whackSoundMP.start();
-            }
-        });
-        i.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                whackSoundMP.start();
-            }
-        });
-
     }
 
     public void game(View view){
+        //final MediaPlayer whackSoundMP= MediaPlayer.create(this, R.raw.whacksounds);
+
+        countDownTimer.cancel();
         int id = view.getId();
+        /*moles[id].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whackSoundMP.start();
+            }
+        });*/
         if(id == k){
             score+=1;
             String s = getString(R.string.text,score);
@@ -119,8 +97,12 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             mistakes+=1;
+            String s = getString(R.string.lives, 3-mistakes);
+            t2.setText(s);
         }
         if(mistakes == 3){
+            t.setText(R.string.loser);
+            countDownTimer.cancel();
             Intent i = new Intent(this, EndPage.class);
             startActivity(i);
         }
